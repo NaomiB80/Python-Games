@@ -35,8 +35,6 @@ class GameSettings:
 # Initialize game settings
 settings = GameSettings()
 
-
-
 # Initialize screen
 screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
 
@@ -44,6 +42,9 @@ screen = pygame.display.set_mode((settings.screen_width, settings.screen_height)
 player = pygame.Rect(settings.player_x, 
                      settings.screen_height - settings.player_size, 
                      settings.player_size, settings.player_size)
+
+player_x = 500 // 2 - 10 // 2
+player_y = 500 // 2 - 10 // 2
 
 player_y_velocity = 0
 is_jumping = False
@@ -60,12 +61,12 @@ while running:
             running = False
 
     # Continuously jump. If the player is not jumping, initialize a new jump
-    if is_jumping is False:
-        # Jumping means that the player is going up. The top of the 
-        # screen is y=0, and the bottom is y=SCREEN_HEIGHT. So, to go up,
-        # we need to have a negative y velocity
-        player_y_velocity = -settings.jump_velocity
-        is_jumping = True
+    # if is_jumping is False:
+    #      # Jumping means that the player is going up. The top of the 
+    #      # screen is y=0, and the bottom is y=SCREEN_HEIGHT. So, to go up,
+    #      # we need to have a negative y velocity
+        # player_y_velocity = -settings.jump_velocity
+        # is_jumping = True
 
     # Update player position. Gravity is always pulling the player down,
     # which is the positive y direction, so we add GRAVITY to the y velocity
@@ -73,6 +74,17 @@ while running:
     # a positive y velocity, and gravity will pull the player down.
     player_y_velocity += settings.gravity
     player.y += player_y_velocity
+
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_SPACE]:
+        player_y_velocity = -settings.jump_velocity
+        player.y += player_y_velocity
+        is_jumping = True
+
+    if keys[pygame.K_RCTRL]:
+        player_y_velocity = -settings.jump_velocity
+        player.y += player_y_velocity
 
     # If the player hits the ground, stop the player from falling.
     # The player's position is measured from the top left corner, so the

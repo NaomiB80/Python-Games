@@ -48,7 +48,7 @@ def main():
         # with a boolean value of whether they are pressed or not
         keys = pygame.key.get_pressed()
 
-        # Move the square based on arrow keys
+        # Move the square based on arrow keys 
         if keys[pygame.K_a]:
             square_x -= SQUARE_SPEED
         if keys[pygame.K_d]:

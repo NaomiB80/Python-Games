@@ -13,10 +13,10 @@ pygame.init()
 
 # Constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 600, 600
-SQUARE_SIZE = 50
-SQUARE_COLOR = (0, 128, 255) # Red-Green-Blue color in the range 0-255
+CIRCLE_RADIUS = 50
+CIRCLE_COLOR = (0, 128, 255) # Red-Green-Blue color in the range 0-255
 BACKGROUND_COLOR = (255, 255, 255) # White
-SQUARE_SPEED = 5
+CIRCLE_SPEED = 5
 FPS = 60
 
 # Initialize the screen
@@ -29,8 +29,8 @@ clock = pygame.time.Clock()
 # Main function
 def main():
     # Initial position of the square
-    square_x = SCREEN_WIDTH // 2 - SQUARE_SIZE // 2
-    square_y = SCREEN_HEIGHT // 2 - SQUARE_SIZE // 2
+    circle_x = SCREEN_WIDTH // 2 - CIRCLE_RADIUS // 2
+    circle_y = SCREEN_HEIGHT // 2 - CIRCLE_RADIUS // 2
     
     running = True
     
@@ -50,17 +50,17 @@ def main():
 
         # Move the square based on arrow keys 
         if keys[pygame.K_a]:
-            square_x -= SQUARE_SPEED
+            circle_x -= CIRCLE_SPEED
         if keys[pygame.K_d]:
-            square_x += SQUARE_SPEED
+            circle_x += CIRCLE_SPEED
         if keys[pygame.K_w]:
-            square_y -= SQUARE_SPEED
+            circle_y -= CIRCLE_SPEED
         if keys[pygame.K_s]:
-            square_y += SQUARE_SPEED
+            circle_y += CIRCLE_SPEED
 
         # Prevent the square from going off the screen
-        square_x = max(0, min(SCREEN_WIDTH - SQUARE_SIZE, square_x))
-        square_y = max(0, min(SCREEN_HEIGHT - SQUARE_SIZE, square_y))
+        circle_x = max(0, min(SCREEN_WIDTH - CIRCLE_RADIUS, circle_x))
+        circle_y = max(0, min(SCREEN_HEIGHT - CIRCLE_RADIUS, circle_y))
 
         # This will clear the screen by filling it 
         # with the background color. If we didn't do this, 
@@ -68,7 +68,7 @@ def main():
         screen.fill(BACKGROUND_COLOR)
 
         # Draw the square
-        pygame.draw.rect(screen, SQUARE_COLOR, (square_x, square_y, SQUARE_SIZE, SQUARE_SIZE))
+        pygame.draw.circle(screen, CIRCLE_COLOR, (circle_x, circle_y), CIRCLE_RADIUS, width=0, draw_top_right=True, draw_top_left=True, draw_bottom_left=True, draw_bottom_right=True)
 
         # Update the display. Imagine that the screen is two different whiteboards. One
         # whiteboard is currently visible to the player, and the other whiteboard is being

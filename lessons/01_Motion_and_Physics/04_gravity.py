@@ -28,6 +28,7 @@ class GameSettings:
     player_x: int = 100 # Initial x position of the player
     gravity: float = 0.3 # acelleration, the change in velocity per frame
     jump_velocity: int = 15
+    ctrl_jump_velocity: int = 20
     white: tuple = (255, 255, 255)
     black: tuple = (0, 0, 0)
     tick_rate: int = 30 # Frames per second
@@ -72,30 +73,30 @@ while running:
     # which is the positive y direction, so we add GRAVITY to the y velocity
     # to make the player go up more slowly. Eventually, the player will have
     # a positive y velocity, and gravity will pull the player down.
-    player_y_velocity += settings.gravity
-    player.y += player_y_velocity
+        # player_y_velocity += settings.gravity
+        # player.y += player_y_velocity
+ 
+        keys = pygame.key.get_pressed()
 
-    keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            player_y_velocity = -settings.jump_velocity
+            player.y += player_y_velocity 
+            is_jumping = True
 
-    if keys[pygame.K_SPACE]:
-        player_y_velocity = -settings.jump_velocity
-        player.y += player_y_velocity
-        is_jumping = True
-
-    if keys[pygame.K_RCTRL]:
-        player_y_velocity = -settings.jump_velocity
-        player.y += player_y_velocity
-
+        if keys[pygame.K_RCTRL]:
+            player_y_velocity = -settings.ctrl_jump_velocity
+            player.y += player_y_velocity
+ 
     # If the player hits the ground, stop the player from falling.
     # The player's position is measured from the top left corner, so the
     # bottom of the player is player.y + PLAYER_SIZE. If the bottom of the
     # player is greater than the height of the screen, the player is on the
     # ground. So, set the player's y position to the bottom of the screen
     # and stop the player from falling
-    if player.bottom >= settings.screen_height:
-        player.bottom = settings.screen_height 
-        player_y_velocity = 0
-        is_jumping = False
+        if player.bottom >= settings.screen_height:
+            player.bottom = settings.screen_height 
+            player_y_velocity = 0
+            is_jumping = False
 
     # Draw everything
     screen.fill(settings.white)

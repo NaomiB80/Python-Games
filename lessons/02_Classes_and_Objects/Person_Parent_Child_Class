@@ -61,6 +61,8 @@ class Child(Person):
         super().say_hello(message)
         print(f"My parents are {', '.join([parent.fname for parent in self.parents])}")
         
+def print_family():
+    print
         
 # Now lets make a family
 mom = Parent("Alice", "Paulson", 35)

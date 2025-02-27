@@ -46,6 +46,15 @@ class Turtle:
         # Turn left by adjusting the angle counterclockwise
         self.angle = (self.angle + angle) % 360
 
+class Turtle_Movement(Turtle):
+    def __init__(self, color: str):
+        super().__init__(self)
+
+    def go_right():
+        turtle.right(100)
+
+    def go_left():
+        turtle.left(100)
 
 # Main loop
 

@@ -16,6 +16,7 @@ def event_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+            
 
 class Turtle:
     def __init__(self, screen, x: int, y: int):
@@ -46,15 +47,13 @@ class Turtle:
         # Turn left by adjusting the angle counterclockwise
         self.angle = (self.angle + angle) % 360
 
-class Turtle_Movement(Turtle):
+class Move(Turtle):
     def __init__(self, color: str):
-        super().__init__(self)
+        self.angle = 0
+        self.pencolor = color
 
-    def go_right():
-        turtle.right(100)
-
-    def go_left():
-        turtle.left(100)
+    def right(self):
+        self.angle = (self.angle)
 
 # Main loop
 
@@ -74,9 +73,10 @@ screen.fill(white)
 turtle = Turtle(screen, screen.get_width() // 2, screen.get_height() // 2)  # Start at the center of the screen
 
 # Draw a square using turtle-style commands
-for _ in range(4):
-    turtle.forward(100)  # Move forward by 100 pixels
-    turtle.left(90)  # Turn left by 90 degrees
+# for _ in range(4):
+#     turtle.forward(100)  # Move forward by 100 pixels
+#     turtle.left(90)  # Turn left by 90 degrees
+
 
 # Display the drawing
 pygame.display.flip()

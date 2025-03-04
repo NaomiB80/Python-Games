@@ -7,6 +7,8 @@ objects.
 """
 import math
 
+import turtle
+
 import pygame
 
 
@@ -47,13 +49,19 @@ class Turtle:
         # Turn left by adjusting the angle counterclockwise
         self.angle = (self.angle + angle) % 360
 
-class Move(Turtle):
+class move(Turtle):
     def __init__(self, color: str):
         self.angle = 0
         self.pencolor = color
-
-    def right(self):
+    
+    def pen(self, color:str, angle:int):
+        self.pencolor(color)
+    
+        self.penup()
+   
         self.angle = (self.angle)
+ 
+        self.pendown()
 
 # Main loop
 
@@ -77,7 +85,8 @@ turtle = Turtle(screen, screen.get_width() // 2, screen.get_height() // 2)  # St
 #     turtle.forward(100)  # Move forward by 100 pixels
 #     turtle.left(90)  # Turn left by 90 degrees
 
-
+turtle.pen(turtle, 'blue', 90)
+ 
 # Display the drawing
 pygame.display.flip()
 

@@ -23,8 +23,8 @@ class Colors:
 @dataclass
 class GameSettings:
     """Settings for the game"""
-    width: int = 500
-    height: int = 500
+    width: int = 700
+    height: int = 700
     gravity: float = 0.3
     player_start_x: int = 100
     player_start_y: int = None

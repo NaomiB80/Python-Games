@@ -19,10 +19,13 @@ draw_grid(screen)
 
 # Create some vectors
 v0 = Vector20(5,5)
-v1 = Vector20(0, -10)  
+v1 = Vector20(0, 1)
+v1.scale_to_length(10)
+v1.rotate(-90)
 v2 = Vector20(-10, 0)  
 v3 = Vector20(0, 10)  
 v4 = Vector20(10, 0) 
+
 
 start = draw_v20(screen, v0, v1)
 start = draw_v20(screen, start, v2)

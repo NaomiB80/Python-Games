@@ -53,8 +53,8 @@ class Turtle:
         self.angle = (self.angle + angle) % 360
 
 class move(Turtle):
-    def __init__(self, color: str):
-        # super, screen, x, y
+    def __init__(self, screen, color: str):
+        super().__init__(self, screen, (self.x, self.y))
         self.angle = 0
         self.pencolor = color
     
@@ -70,7 +70,6 @@ class move(Turtle):
     def pen_down(self):
         self.pen_down = True
 
-    
 
 # Main loop
 
@@ -88,7 +87,7 @@ black = (0, 0, 0)
 Blue = (0, 255, 255)
 
 screen.fill(white)
-turtle = move(screen, screen.get_width() // 2, screen.get_height() // 2)  # Start at the center of the screen
+turtle = move(screen, screen.get_width() // 2, screen.get_height() // 2, Blue, (0, 0))  # Start at the center of the screen
 
 turtle.pen_down()
 # Draw a square using turtle-style commands

@@ -9,7 +9,7 @@ class Settings:
     height = 600
     fps = 60
     triangle_size = 20
-    projectile_speed = 5
+    projectile_speed = 20
     projectile_size = 11
     shoot_delay = 250  # 250 milliseconds between shots, or 4 shots per second
     colors = {"white": (255, 255, 255), "black": (0, 0, 0), "red": (255, 0, 0)}

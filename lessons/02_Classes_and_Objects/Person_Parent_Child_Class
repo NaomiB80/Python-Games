@@ -12,8 +12,8 @@ class Person:
         """Prints a greeting to the console."""
         print(f"Hello, my name is {self.fname} {self.lname} and I am {self.age} years old. {message}")
     
-    def print_family(self):
-        print(f"{self.fname}, {self.lname}")
+    # def print_family(self):
+    #     print(f"{self.fname}, {self.lname}")
         
         
 class Parent(Person):
@@ -50,14 +50,14 @@ class Parent(Person):
             for child in self.children:
                 print(f" {child.fname} {child.lname} {child.age}")
         
-
     # def print_family(self):
     #     super().print_family()
     #     print(f"{self.fname}, {self.lname}")
     #     if self.spouse:
     #         print({self.spouse})
-    #     if self.child:
-    #         print({self.child})
+    #     if self.children:
+    #         for child in self.children:
+    #             print({self.child})
 
 class Child(Person):
     """Child represents a child in our system."""
@@ -83,15 +83,8 @@ dad = Parent("Bob", "Paulson", 40, mom)
 charlie = Child("Charlie", "Paulson", 10, [mom, dad])
 dahlia = Child("Dahlia", "Paulson", 8, [mom, dad])
 
-# Connect the children to the parents
-mom.add_child(charlie)
-mom.add_child(dahlia)
-dad.add_child(charlie)
-dad.add_child(dahlia)
-
-
 mom.say_hello("Hello!") # Call the say_hello method of the mom object
 print()
 dahlia.say_hello("Yo!")
 
-mom.print_family()
+# mom.print_family()

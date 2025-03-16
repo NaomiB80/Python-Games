@@ -12,8 +12,8 @@ class Person:
         """Prints a greeting to the console."""
         print(f"Hello, my name is {self.fname} {self.lname} and I am {self.age} years old. {message}")
     
-    def print_family(self, fam: str):
-        print(f"{self}. {fam}")
+    def print_family(self):
+        print(f"{self.fname}, {self.lname}")
         
         
 class Parent(Person):
@@ -51,13 +51,13 @@ class Parent(Person):
                 print(f" {child.fname} {child.lname} {child.age}")
         
 
-    def print_family(self, fam: str):
-        super().print_family(fam)
-        print({self})
-        if self.spouse:
-            print({self.spouse})
-        if self.child:
-            print({self.child})
+    # def print_family(self):
+    #     super().print_family()
+    #     print(f"{self.fname}, {self.lname}")
+    #     if self.spouse:
+    #         print({self.spouse})
+    #     if self.child:
+    #         print({self.child})
 
 class Child(Person):
     """Child represents a child in our system."""
@@ -66,6 +66,9 @@ class Child(Person):
         """Initializes a new Child object."""
         super().__init__(first_name, last_name, age)  # Call Person.__init__ to initialize the name and age attributes
         self.parents = parents
+
+        for parent in parents:
+            parent.add_child(self)
 
     def say_hello(self, message: str):
         """Prints a greeting to the console."""

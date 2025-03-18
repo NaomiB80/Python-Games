@@ -16,8 +16,8 @@ class Colors:
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     RED = (255, 0, 0)
-    PLAYER_COLOR = RED
-    BACKGROUND_COLOR = BLACK
+    PLAYER_COLOR = BLACK
+    BACKGROUND_COLOR = WHITE
 
 
 @dataclass
@@ -144,6 +144,9 @@ class Player:
         
     def update_v(self):
         """Update the player's velocity based on gravity and bounce on edges"""
+
+        drag = -self.vel * 0.1
+        self.vel += drag
          
         self.vel += self.game.gravity  # Add gravity to the velocity
 

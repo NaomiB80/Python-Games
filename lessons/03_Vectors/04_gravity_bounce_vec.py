@@ -23,13 +23,13 @@ class Colors:
 @dataclass
 class GameSettings:
     """Settings for the game"""
-    width: int = 700
-    height: int = 700
+    width: int = 500
+    height: int = 500
     gravity: float = 0.3
     player_start_x: int = 100
-    player_start_y: int = None
-    player_v_y: float = 0  # Initial y velocity
-    player_v_x: float = 4  # Initial x velocity
+    player_start_y: int = 100
+    player_v_y: float = 4  # Initial y velocity
+    player_v_x: float = 0  # Initial x velocity
     player_width: int = 20
     player_height: int = 20
     player_jump_velocity: float = 15
@@ -93,7 +93,6 @@ class Player:
         self.vel = pygame.Vector2(settings.player_v_x, settings.player_v_y)  # Velocity vector
 
 
-
     # Direction functions. IMPORTANT! Using these functions isn't really
     # necessary, but it makes the code more readable. You could just use
     # self.vel.x < 0, but writing "self.going_left()" is a lot easier to read and
@@ -145,13 +144,17 @@ class Player:
     def update_v(self):
         """Update the player's velocity based on gravity and bounce on edges"""
 
-        drag = -self.vel * 0.1
+        drag = -self.vel * 0.
         self.vel += drag
          
         self.vel += self.game.gravity  # Add gravity to the velocity
 
         if self.at_bottom() and self.going_down():
-            self.vel.y = 0
+            # self.vel.y = 0
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_SPACE]:
+                thrust = self.vel * 0.2
+                self.vel += thrust
 
         if self.at_top() and self.going_up():
             self.vel.y = -self.vel.y # Bounce off the top. 
@@ -190,11 +193,18 @@ class Player:
         
         # Notice that we've gotten rid of self.is_jumping, because we can just
         # check if the player is at the bottom. 
+        keys = pygame.key.get_pressed()
+
         if self.at_bottom():
-            self.vel += self.v_jump
+            if keys[pygame.K_SPACE]:
+                print("i jumped")
+                self.vel += self.v_jump
+                thrust = self.vel * 0.2
+                self.vel += thrust
          
 
     def draw(self, screen):
+        #print(self.pos.x, self.pos.y, self.width, self.height)
         pygame.draw.rect(screen, Colors.PLAYER_COLOR, (self.pos.x, self.pos.y, self.width, self.height))
 
 

@@ -7,7 +7,7 @@ understandable, and makes it easier to add more complex features to the game.
 
 
 """
-import pygame
+import pygame 
 from dataclasses import dataclass
 
 
@@ -195,9 +195,8 @@ class Player:
         # check if the player is at the bottom. 
         keys = pygame.key.get_pressed()
 
-        if self.at_bottom():
+        if self.at_bottom(): 
             if keys[pygame.K_SPACE]:
-                print("i jumped")
                 self.vel += self.v_jump
                 thrust = self.vel * 0.2
                 self.vel += thrust

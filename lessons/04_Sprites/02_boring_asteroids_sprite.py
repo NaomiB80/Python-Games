@@ -8,9 +8,9 @@ class Settings:
     width = 800
     height = 600
     fps = 60
-    triangle_size = 20
-    projectile_speed = 20
-    projectile_size = 11
+    triangle_size = 15
+    projectile_speed = 10          
+    projectile_size = 10
     shoot_delay = 250  # 250 milliseconds between shots, or 4 shots per second
     colors = {"white": (255, 255, 255), "black": (0, 0, 0), "red": (255, 0, 0)}
 
@@ -20,6 +20,7 @@ class Settings:
 # inherits from the Sprite class. The main additional function of a Sprite is
 # that it can be added and removed from groups. This is useful for handling
 # multiple objects of the same type, like projectiles.
+
 class Spaceship(pygame.sprite.Sprite):
     """Class representing the spaceship."""
 
@@ -112,7 +113,20 @@ class Spaceship(pygame.sprite.Sprite):
     # screen. We only need to add the sprite to a group and the group will take
     # care of drawing the sprite.
 
+    # def update(self):
         
+    #     self.handle_input()
+    #     self.update_angle()
+    #     self.update_position()
+
+    #     super().update() # Don't for get this part!
+
+    # def update_position(self):
+
+    # def update_angle(self):
+    
+    # def handle_input(self):
+
 
 class Projectile(pygame.sprite.Sprite):
     """Class to handle projectile movement and drawing."""
@@ -199,8 +213,6 @@ class Game:
 
     def run(self):
         """Main Loop for the game."""
-        
-       
         
         while self.running:
             self.handle_events()

@@ -77,7 +77,7 @@ class Player:
 
     def __init__(self, game: Game):
         self.game = game
-        settings = self.game.settings
+        self.settings = self.game.settings
 
         self.width = settings.player_width
         self.height = settings.player_height
@@ -91,7 +91,6 @@ class Player:
         
         # Player's velocity
         self.vel = pygame.Vector2(settings.player_v_x, settings.player_v_y)  # Velocity vector
-
 
     # Direction functions. IMPORTANT! Using these functions isn't really
     # necessary, but it makes the code more readable. You could just use
@@ -147,7 +146,7 @@ class Player:
         drag = -self.vel * 0.
         self.vel += drag
          
-        self.vel += self.game.gravity  # Add gravity to the velocity
+        self.vel += self.gravity  # Add gravity to the velocity
 
         if self.at_bottom() and self.going_down():
             # self.vel.y = 0

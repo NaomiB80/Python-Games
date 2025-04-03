@@ -59,38 +59,38 @@ class Game:
         running = True
     
         pygame.key.set_repeat(50, 50)
-    
+        
         key_limit = 0
         while running:
             key_limit += 1
         
-        self.screen.fill(settings.BACKGROUND_COLOR)
-        
-        keys = pygame.key.get_pressed()
-        
-        if key_limit%3 == 0: # Limit frequency of key presses so the user can set exact angles
-            if keys[pygame.K_LEFT]:
-                player.direction_vector = player.direction_vector.rotate(-settings.ANGLE_CHANGE)
-            elif keys[pygame.K_RIGHT]:
-                player.direction_vector = player.direction_vector.rotate(settings.ANGLE_CHANGE)
+            self.screen.fill(colors.WHITE)
+            
+            keys = pygame.key.get_pressed()
+            
+            if key_limit%3 == 0: # Limit frequency of key presses so the user can set exact angles
+                if keys[pygame.K_LEFT]:
+                    player.direction_vector = player.direction_vector.rotate(-settings.ANGLE_CHANGE)
+                elif keys[pygame.K_RIGHT]:
+                    player.direction_vector = player.direction_vector.rotate(settings.ANGLE_CHANGE)
+                    
+            if keys[pygame.K_UP]:
+                player.direction_vector.scale_to_length(player.direction_vector.length() + settings.LENGTH_CHANGE)
+            elif keys[pygame.K_DOWN]:
+                player.direction_vector.scale_to_length(player.direction_vector.length() - settings.LENGTH_CHANGE)
+            elif keys[pygame.K_SPACE]:
+                player.move()
+                        
+            print("hey 2")
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
                 
-        if keys[pygame.K_UP]:
-            player.direction_vector.scale_to_length(player.direction_vector.length() + settings.LENGTH_CHANGE)
-        elif keys[pygame.K_DOWN]:
-            player.direction_vector.scale_to_length(player.direction_vector.length() - settings.LENGTH_CHANGE)
-        elif keys[pygame.K_SPACE]:
-            player.move()
-                
+            # Draw the player and the direction vector
+            player.draw(self.screen)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                
-        # Draw the player and the direction vector
-        player.draw()
-
-        pygame.draw.circle(self.screen, Colors.RED, (250, 250), 70, width=0, draw_top_right=True, draw_top_left=True, draw_bottom_left=True, draw_bottom_right=True)
-
+            pygame.draw.circle(self.screen, Colors.RED, (250, 250), 70, width=0, draw_top_right=True, draw_top_left=True, draw_bottom_left=True, draw_bottom_right=True)
+            
 
 class Player:
     """Player class, just a bouncing rectangle"""
@@ -140,7 +140,7 @@ class Player:
        
         for i in range(N):
             self.position += step
-            self.screen.fill(settings.BACKGROUND_COLOR)
+            self.screen.fill((255,255,255))
             self.draw(show_line=False)
             pygame.draw.line(self.screen, settings.LINE_COLOR, init_position, final_position, 2)
             pygame.display.flip()
@@ -152,10 +152,10 @@ class Player:
     # understand, it makes the code self-documenting. 
 
     def draw(self, screen):
-        #print(self.pos.x, self.pos.y, self.width, self.height)
+        print(self.pos.x, self.pos.y, self.width, self.height)
         pygame.draw.rect(screen, Colors.WHITE, (self.pos.x, self.pos.y, self.width, self.height))
 
-
+colors = Colors()
 settings = GameSettings()
 game = Game(settings)
 game.run()

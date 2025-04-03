@@ -146,7 +146,7 @@ class Player:
         drag = -self.vel * 0.
         self.vel += drag
          
-        self.vel += self.gravity  # Add gravity to the velocity
+        self.vel += game.gravity  # Add gravity to the velocity
 
         if self.at_bottom() and self.going_down():
             # self.vel.y = 0

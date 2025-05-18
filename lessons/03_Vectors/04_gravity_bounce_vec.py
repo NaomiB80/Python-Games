@@ -8,16 +8,16 @@ understandable, and makes it easier to add more complex features to the game.
 
 """
 import pygame 
-from dataclasses import dataclass
+from dataclasses import dataclass 
 
 
 class Colors:
     """Constants for Colors"""
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-    RED = (255, 0, 0)
+    RED = (50, 0, 0)
     PLAYER_COLOR = BLACK
-    BACKGROUND_COLOR = WHITE
+    BACKGROUND_COLOR = RED
 
 
 @dataclass
@@ -25,14 +25,14 @@ class GameSettings:
     """Settings for the game"""
     width: int = 500
     height: int = 500
-    gravity: float = 0.3
+    gravity: float = 0.4
     player_start_x: int = 100
     player_start_y: int = 100
-    player_v_y: float = 4  # Initial y velocity
+    player_v_y: float = 10  # Initial y velocity
     player_v_x: float = 0  # Initial x velocity
     player_width: int = 20
     player_height: int = 20
-    player_jump_velocity: float = 15
+    player_jump_velocity: float = 25
     frame_rate: int = 15
 
 
@@ -176,6 +176,14 @@ class Player:
         if self.at_bottom():
             self.pos.y = self.game.settings.height - self.height
 
+        keys = pygame.key.get_pressed()
+
+        if self.at_bottom(): 
+            if keys[pygame.K_SPACE]:
+                self.vel += self.v_jump
+                thrust = self.vel * 0.2
+                self.vel += thrust
+
         if self.at_top():
             self.pos.y = 0
 
@@ -192,13 +200,6 @@ class Player:
         
         # Notice that we've gotten rid of self.is_jumping, because we can just
         # check if the player is at the bottom. 
-        keys = pygame.key.get_pressed()
-
-        if self.at_bottom(): 
-            if keys[pygame.K_SPACE]:
-                self.vel += self.v_jump
-                thrust = self.vel * 0.2
-                self.vel += thrust
          
 
     def draw(self, screen):
@@ -209,3 +210,4 @@ class Player:
 settings = GameSettings()
 game = Game(settings)
 game.run()
+

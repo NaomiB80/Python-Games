@@ -24,6 +24,7 @@ pygame.display.set_caption("Dino Jump")
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+PINK = (255, 0, 255)
 
 # FPS
 FPS = 60
@@ -47,7 +48,7 @@ class Obstacle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.Surface((OBSTACLE_WIDTH, OBSTACLE_HEIGHT))
-        self.image.fill(BLACK)
+        self.image.fill(PINK)
         self.rect = self.image.get_rect()
         self.rect.x = WIDTH
         self.rect.y = HEIGHT - OBSTACLE_HEIGHT - 10
@@ -74,7 +75,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.Surface((PLAYER_SIZE, PLAYER_SIZE))
-        self.image.fill(BLUE)
+        self.image.fill(PINK)
         self.rect = self.image.get_rect()
         self.rect.x = 50
         self.rect.y = HEIGHT - PLAYER_SIZE - 10
@@ -82,7 +83,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_SPACE]:
             self.rect.y -= self.speed
         if keys[pygame.K_DOWN]:
             self.rect.y += self.speed
@@ -126,6 +127,8 @@ def game_loop():
 
     obstacle_count = 0
 
+    obstacles_collided = 0
+
     while not game_over:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -146,15 +149,16 @@ def game_loop():
         collider = pygame.sprite.spritecollide(player, obstacles, dokill=False)
         if collider:
             collider[0].explode()
+            obstacles_collided += add_obstacle(obstacles)
        
         # Draw everything
         screen.fill(WHITE)
-        pygame.draw.rect(screen, BLUE, player)
+        pygame.draw.rect(screen, PINK, player)
         obstacles.draw(screen)
 
         # Display obstacle count
-        obstacle_text = font.render(f"Obstacles: {obstacle_count}", True, BLACK)
-        screen.blit(obstacle_text, (10, 10))
+        obstacle_text = font.render(f"Obstacles: {obstacles_collided}", True, PINK)
+        screen.blit(obstacle_text, (10, -10))
 
         pygame.display.update()
         clock.tick(FPS)

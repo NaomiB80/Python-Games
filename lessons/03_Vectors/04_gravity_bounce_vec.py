@@ -16,8 +16,9 @@ class Colors:
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     RED = (50, 0, 0)
-    PLAYER_COLOR = BLACK
-    BACKGROUND_COLOR = RED
+    PINK = (255, 0, 255)
+    PLAYER_COLOR = PINK
+    BACKGROUND_COLOR = BLACK
 
 
 @dataclass

@@ -19,7 +19,7 @@ class Settings:
     SCREEN_WIDTH = 800
     SCREEN_HEIGHT = 600
     BACKGROUND_SCROLL_SPEED = 2
-    FPS = 10000
+    FPS = 1
 
 # Initialize screen
 screen = pygame.display.set_mode((Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT))

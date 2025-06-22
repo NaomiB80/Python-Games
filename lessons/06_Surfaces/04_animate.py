@@ -42,7 +42,7 @@ def main():
     # Variables for animation
     frog_index = 0
     allig_index = 0
-    frames_per_image = 6
+    frames_per_image = 0
     frame_count = 0
 
     # Main game loop
